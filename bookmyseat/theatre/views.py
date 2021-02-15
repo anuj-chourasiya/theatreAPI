@@ -39,3 +39,41 @@ def vacate_seat(request,seatnumber):
         else:
             data["failure"]="delete failed"
         return Response(data)
+
+
+@api_view(['GET',])
+def info_detail(request,field): 
+    if request.method == 'GET':
+        field=str(field)
+        serializer_class=OccupySerializer
+        try:
+            if field.isdigit() and int(field)<=20:
+                #inside seat
+                obj=Info.objects.get(seatnumber=field)
+                data={}
+                data['ticket id']=str(obj.uid) 
+                data['name']=obj.name
+                data['seatnumber']=field
+                return Response(data)
+            
+            elif field.isalpha():
+                obj=Info.objects.get(name=field)
+                seatobj=obj.seatnumber
+                
+                data={}
+                data['ticket id']=str(obj.uid) 
+                data['name']=field
+                data['seatnumber']=seatobj.seatnumber
+                return Response(data)
+            else:
+                obj=Info.objects.get(uid=field)
+                seatobj=obj.seatnumber
+                data={}
+                data['ticket id']=field
+                data['name']=obj.name
+                data['seatnumber']=seatobj.seatnumber
+                return Response(data)
+        except:
+            return Response("object not found", status.HTTP_404_NOT_FOUND)
+        
+        
