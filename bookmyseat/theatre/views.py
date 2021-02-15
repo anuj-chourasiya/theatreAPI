@@ -23,4 +23,19 @@ def occupy_seat(request):
                 data['seatnumber']=res
             return Response(data=data)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-        
+
+@api_view(['DELETE',])
+def vacate_seat(request,seatnumber):  
+    print("inside")
+    try:
+        seat=Seat.objects.get(pk=seatnumber)
+    except:
+        return Response("object not found", status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':
+        operation=seat.delete()
+        data={}
+        if operation:
+            data["success"]="delete successful"
+        else:
+            data["failure"]="delete failed"
+        return Response(data)
