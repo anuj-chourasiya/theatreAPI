@@ -8,20 +8,33 @@ theatreAPI is built using Django and Django Rest Framework (DRF) and it provides
 ## Endpoints
 
 ### occupy
+
+####  URL
+/occupy
+
+#### Method
+It supports POST request only and requires data in JSON format 
+
+#### Description
 Occupy seat - [Endpoint URL - /occupy/ ] The Endpoint will be given the person's name and ticket ID (this should be a UUID field, tickets will not contain information about the seat number beforehand) as input and outputs the seat number which will be occupied. If the seating is full, the appropriate error message is returned.
 
-####  GET Request
+#### Request Body
 ```javascript
 {
-  "seatnumber" : string, example "anuj"
+  "name" : string, example "1"
   
 }
 ```
 
-#### Response
+#### Return Code
+It returns 200 Response code if the request is successfully executed
+It returns 400 Response code if the request data is not correct 
+
+#### Response body
+
 ```javascript
 {
-  "seatnumber" : string, example "anuj"
+  "seatnumber" : integer, example "1"
   
 }
 ```
