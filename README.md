@@ -93,7 +93,7 @@ theatreAPI is built using Django and Django Rest Framework (DRF) and it provides
 
 ## Status Codes
 
-Gophish returns the following status codes in its API:
+theatreAPI returns the following status codes in its API:
 
 | Status Code | Description |
 | :--- | :--- |
